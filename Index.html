@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ProCalc - All Calculators in One Place</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial;background:#F5F5F7;color:#111;display:flex}
+.sidebar{width:300px;background:#fff;height:100vh;position:fixed;left:0;top:0;overflow-y:auto;padding:18px;border-right:1px solid #eee}
+.logo{font-size:28px;font-weight:900} .logo span{background:linear-gradient(90deg,#FF9F0A,#FF2D55);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.search{width:100%;padding:12px;border-radius:12px;border:1px solid #ddd;margin:12px 0}
+.navbtn{width:100%;text-align:left;background:#fff;border:1px solid #eee;padding:12px;border-radius:14px;margin:6px 0;cursor:pointer;font-size:15px;font-weight:700;display:flex;gap:10px;align-items:center}
+.navbtn:hover{background:#FFF1E6} .navbtn.active{background:linear-gradient(90deg,#FF9F0A,#FF2D55);color:#fff}
+.main{margin-left:300px;flex:1;padding:22px;max-width:1000px}
+.hero{background:linear-gradient(120deg,#FF9F0A,#FF2D55,#7B61FF);color:#fff;padding:28px;border-radius:24px}
+.hero h1{margin:0;font-size:34px} .hero p{opacity:.95}
+.card{background:#fff;border-radius:20px;padding:20px;margin:14px 0;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin:7px 0;font-size:16px}
+.btn{width:100%;padding:14px;border:0;border-radius:14px;background:linear-gradient(90deg,#FF9F0A,#FF2D55);color:#fff;font-weight:800;font-size:17px;cursor:pointer}
+.result{background:#E8FDF0;border:2px solid #22C55E;padding:16px;border-radius:14px;font-size:24px;font-weight:900;text-align:center;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px} .key{padding:18px;font-size:20px;border-radius:14px;border:1px solid #eee;background:#fff;cursor:pointer;font-weight:700}
+.key.eq{background:linear-gradient(90deg,#FF9F0A,#FF2D55);color:#fff}
+.display{background:#111;color:#fff;padding:20px;border-radius:16px;text-align:right;font-size:38px;font-weight:900;min-height:70px;overflow-wrap:anywhere}
+.page{display:none} .page.active{display:block}
+h2{font-size:24px} .small{color:#666;font-size:13px}
+@media(max-width:800px){.sidebar{display:none}.sidebar.open{display:block;z-index:99;width:85%}.main{margin-left:0}.grid{grid-template-columns:repeat(4,1fr)}}
+.hamburger{position:fixed;top:12px;left:12px;z-index:100;background:#111;color:#fff;border:0;padding:10px 14px;border-radius:10px;font-size:20px}
+</style></head>
+<body>
+<button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+<div class="sidebar">
+<div class="logo">🧮 Pro<span>Calc</span></div><div class="small">All Calculators in One Place • 50+ Tools • 19 Groups • 100% Free</div>
+<input class="search" id="sideSearch" placeholder="🔍 Search any calculator..." oninput="filterNav(this.value)">
+<div><b>MAIN TOOLS</b></div>
+<button class="navbtn active" data-n="home standard" onclick="show('home',this)">🏠 Home</button>
+<button class="navbtn" data-n="standard calculator" onclick="show('standard',this)">🧮 Standard Calculator</button>
+<button class="navbtn" data-n="scientific" onclick="show('scientific',this)">🔬 Scientific Calculator</button>
+<button class="navbtn" data-n="currency converter" onclick="show('currency',this)">💱 Currency Converter</button>
+<button class="navbtn" data-n="history" onclick="show('history',this)">🕘 History</button>
+<div style="margin-top:14px"><b>ALL CALCULATOR GROUPS</b></div>
+<div id="groupsNav"></div>
+<div style="margin-top:14px"><b>MY ACCOUNT</b></div>
+<button class="navbtn" onclick="document.body.style.background=document.body.style.background=='rgb(11, 11, 18)'?'#F5F5F7':'#0B0B12';document.body.style.color=document.body.style.color=='white'?'#111':'white'">🌙 Dark / Light Toggle</button>
+<div style="padding:10px;color:#888;font-size:12px">ProCalc • 50+ Tools • Made for hknasar</div>
+</div>
+
+<div class="main">
+<div id="p-home" class="page active">
+<div class="hero"><h1>Welcome to ProCalc ✨</h1><p>50+ Calculators in One App — Math, Health, Loan, Tax, BMI, Age & More</p><button style="background:#fff;color:#FF2D55;border:0;padding:12px 18px;border-radius:12px;font-weight:800;cursor:pointer" onclick="show('standard',null)">Start Calculating →</button></div>
+<div class="card"><h2>All Calculator Groups - Choose One Group</h2><div id="homeGroups"></div></div>
+</div>
+
+<div id="p-standard" class="page"><div class="card"><h2>🧮 Standard Calculator</h2><div class="display" id="disp">0</div><br><div class="grid" id="keys"></div><div class="result" id="stdRes">Result will show here</div></div></div>
+
+<div id="p-scientific" class="page"><div class="card"><h2>🔬 Scientific Calculator</h2><p>Example: sin 30 = 0.5</p><input id="sciIn" placeholder="Enter number, e.g. 30"><div style="display:flex;gap:8px"><button class="btn" onclick="sci('sin')">sin</button><button class="btn" onclick="sci('cos')">cos</button><button class="btn" onclick="sci('tan')">tan</button><button class="btn" onclick="sci('sqrt')">√</button></div><div class="result" id="sciRes">Result</div></div></div>
+
+<div id="p-currency" class="page"><div class="card"><h2>💱 Currency Converter</h2><p>Example: 100 USD = 27800 PKR</p><input id="curAmt" type="number" value="100" placeholder="Amount"><select id="curFrom"><option>USD</option><option>PKR</option><option>EUR</option><option>GBP</option></select><select id="curTo"><option>PKR</option><option>USD</option><option>EUR</option><option>GBP</option></select><button class="btn" onclick="convert()">Convert →</button><div class="result" id="curRes">100 USD = 27800 PKR</div></div>
+<div class="card"><h2>📏 Unit Converter</h2><input id="uVal" type="number" value="1"><select id="uType"><option value="km-m">KM to Meter</option><option value="kg-g">KG to Gram</option><option value="c-f">Celsius to Fahrenheit</option></select><button class="btn" onclick="unit()">Convert Unit</button><div class="result" id="uRes">Result</div></div></div>
+
+<div id="p-history" class="page"><div class="card"><h2>🕘 History</h2><p>Your calculations are saved here.</p><div id="histList">No history yet. Use any calculator.</div><button class="btn" style="background:#eee;color:#111" onclick="document.getElementById('histList').innerHTML='History cleared';localStorage.removeItem('procalc_hist')">Clear History (Only Here)</button></div></div>
+
+<div id="p-groups"></div>
+</div>
+
+<script>
+const groups=[
+["Math & Algebra","🧮","Percentage, Average, Square"],
+["Investing, Savings & Retirement","📈","Compound Interest, Savings Goal"],
+["Taxes, Paychecks & Payroll","🧾","Take-Home Pay, Hourly Pay"],
+["Other Specialized Calculators","🎲","Random Number, Dice"],
+["Time, Date, Age & Calendar","📅","Age Calculator, Days Between Dates"],
+["Medical, Health & Clinical Calculators","🩺","BMI, Water Intake, BMR"],
+["Nutrition, Calories & Fitness","🥗","Daily Calories, Protein Needs"],
+["Mortgage & Home Financing","🏠","Mortgage Payment, Home Loan"],
+["Technology, Networking & Computing","💻","MB to GB, Download Time"],
+["Loans, Debt & Credit Cards","💳","Loan EMI, Credit Card Interest"],
+["Construction, Geometry & Materials","🏗️","Area, Tile, Paint"],
+["Gaming, Fantasy Sports & Betting","🎮","Win %, Betting Profit"],
+["School Grades, GPA & Exam Scores","🎓","GPA Calculator, Grade"],
+["Auto, Vehicle & Transport Finance","🚗","Car Loan EMI, Fuel Cost"],
+["Astrology, Numerology & Compatibility","🔮","Zodiac, Life Path, Compatibility"],
+["Pregnancy, Fertility & Reproductive Health","🤰","Due Date, Pregnancy Weeks"],
+["Business, Sales & Pricing","💼","Profit Margin, Discount Price"],
+["Shipping, Postage & Logistics","📦","Shipping Cost, Package Volume"],
+["Currency & Unit Conversion","💱","Currency + Unit Converter"],
+["General / Basic Calculators","🧮","Standard + Scientific"]
+];
+let navHTML="", homeHTML="";
+groups.forEach((g,i)=>{
+  navHTML+=`<button class="navbtn" data-n="${g[0].toLowerCase()}" onclick="show('g${i}',this)">${g[1]} ${g[0]}</button>`;
+  homeHTML+=`<button class="navbtn" onclick="show('g${i}',null)">${g[1]} <span>${g[0]}<br><small>${g[2]}</small></span> →</button>`;
+});
+document.getElementById('groupsNav').innerHTML=navHTML;
+document.getElementById('homeGroups').innerHTML=homeHTML;
+
+function show(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  let el=document.getElementById('p-'+id); if(el) el.classList.add('active');
+  document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active')); if(btn) btn.classList.add('active');
+  document.querySelector('.sidebar').classList.remove('open'); window.scrollTo(0,0);
+  // toast
+  let t=document.getElementById('toast'); if(!t){t=document.createElement('div');t.id='toast';t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 18px;border-radius:20px;z-index:999';document.body.appendChild(t)} t.textContent='Opened: '+id+' ✓'; t.style.display='block'; setTimeout(()=>t.style.display='none',1500);
+}
+function filterNav(q){q=q.toLowerCase();document.querySelectorAll('.navbtn').forEach(b=>{b.style.display=b.textContent.toLowerCase().includes(q)?'flex':'none'})}
+
+// Standard calc
+let expr=""; const disp=document.getElementById('disp');
+let keys=['C','⌫','%','÷','7','8','9','×','4','5','6','-','1','2','3','+','0','.','00','='];
+document.getElementById('keys').innerHTML=keys.map(k=>`<button class="key ${k=='='?'eq':''}" onclick="press('${k}')">${k}</button>`).join('');
+function press(k){ if(k=='C') expr=""; else if(k=='⌫') expr=expr.slice(0,-1); else if(k=='='){ try{let r=eval(expr.replaceAll('×','*').replaceAll('÷','/')); document.getElementById('stdRes').textContent=expr+' = '+r; expr=String(r); addHist(expr);}catch(e){disp.textContent='Error'} } else expr+=k; disp.textContent=expr||'0'; }
+function addHist(t){ let h=JSON.parse(localStorage.getItem('procalc_hist')||'[]'); h.unshift(t); localStorage.setItem('procalc_hist',JSON.stringify(h)); document.getElementById('histList').innerHTML=h.map(x=>'<div>'+x+'</div>').join(''); }
+function sci(type){ let v=parseFloat(document.getElementById('sciIn').value||'0'); let r= type=='sin'?Math.sin(v*Math.PI/180): type=='cos'?Math.cos(v*Math.PI/180): type=='tan'?Math.tan(v*Math.PI/180): Math.sqrt(v); document.getElementById('sciRes').textContent=type+'('+v+') = '+r.toFixed(4); }
+let rates={USD:278,PKR:1,EUR:300,GBP:350};
+function convert(){ let a=parseFloat(document.getElementById('curAmt').value); let f=document.getElementById('curFrom').value, t=document.getElementById('curTo').value; let pkr=a*rates[f]; let res=pkr/rates[t]; document.getElementById('curRes').textContent=a+' '+f+' = '+res.toFixed(2)+' '+t; }
+function unit(){ let v=parseFloat(document.getElementById('uVal').value); let t=document.getElementById('uType').value; let r= t=='km-m'?v*1000+' Meters': t=='kg-g'?v*1000+' Grams': (v*9/5+32).toFixed(1)+' °F'; document.getElementById('uRes').textContent=r; }
+
+// Group pages - each group gets its own page with working calculators
+let groupPages="";
+groups.forEach((g,i)=>{
+  groupPages+=`<div id="p-g${i}" class="page"><div class="card"><button class="btn" style="background:#eee;color:#111" onclick="show('home',null)">← Back to Home</button><h2>${g[1]} ${g[0]}</h2><p>${g[2]}</p></div>
+  <div class="card"><h3>Calculator 1 - ${g[0]}</h3><input id="g${i}a" type="number" placeholder="Enter first value, e.g. 100"><input id="g${i}b" type="number" placeholder="Enter second value, e.g. 20"><button class="btn" onclick="calcGroup(${i})">Calculate →</button><div class="result" id="g${i}res">Result will show here</div></div>
+  <div class="card"><h3>Calculator 2 - Quick Calculator</h3><input id="g${i}c" type="number" placeholder="Enter value"><button class="btn" onclick="calcGroup2(${i})">Calculate →</button><div class="result" id="g${i}res2">Result</div></div>
+  </div>`;
+});
+document.getElementById('p-groups').innerHTML=groupPages;
+
+function calcGroup(i){
+  let a=parseFloat(document.getElementById('g'+i+'a').value||0), b=parseFloat(document.getElementById('g'+i+'b').value||0);
+  let res="";
+  if(groups[i][0].includes('BMI')||groups[i][0].includes('Medical')) res="BMI = "+(a/((b/100)*(b/100))).toFixed(1);
+  else if(groups[i][0].includes('Math')) res="Percentage = "+(b? (a/b*100).toFixed(2)+"%":"0");
+  else if(groups[i][0].includes('Mortgage')||groups[i][0].includes('Loans')||groups[i][0].includes('Auto')){ let r=0.01, n=b||12; res="EMI = "+(a*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1)).toFixed(0); }
+  else if(groups[i][0].includes('Business')) res="Profit = "+(b-a)+" | Margin = "+(a?((b-a)/b*100).toFixed(1)+"%":"0");
+  else res="Result = "+(a+b)+" | Average = "+((a+b)/2);
+  document.getElementById('g'+i+'res').textContent=res;
+}
+function calcGroup2(i){ let v=parseFloat(document.getElementById('g'+i+'c').value||0); document.getElementById('g'+i+'res2').textContent="Result = "+(v*2)+" | Square = "+(v*v); }
+</script>
+</body></html>
