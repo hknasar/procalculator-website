@@ -1,0 +1,318 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ProCalculator - 53 Real Calculators | All Tools Really Work</title><meta name="description" content="ProCalculator - 53 Real Calculators. Every tool has its own real formula."><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,Arial;background:#08080F;color:#fff;display:flex;flex-direction:column;min-height:100vh}
+body[data-theme="light"]{background:#FAFAFF;color:#111}
+body[data-theme="light"] .card,body[data-theme="light"] .tool-card{background:#fff;color:#111;border-color:#E8E8FF;box-shadow:0 10px 30px rgba(108,92,231,.08)}
+body[data-theme="light"] input,body[data-theme="light"] select{background:#fff;color:#111;border-color:#DCDCF5}
+body[data-theme="light"] .result{background:#F6F6FF;color:#111}
+body[data-theme="light"] .tool-card p,body[data-theme="light"] .small{color:#666}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(8,8,15,.92);backdrop-filter:blur(12px);border-bottom:2px solid #6C5CE7;padding:12px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+body[data-theme="light"] .topbar{background:rgba(255,255,255,.92)}
+.logo{font-size:26px;font-weight:900;letter-spacing:-.5px}.logo span{color:#6C5CE7}
+.search{flex:1;max-width:420px;padding:12px 14px;border-radius:99px;border:2px solid #6C5CE7;background:#14141F;color:#fff;outline:none;margin:0}
+body[data-theme="light"] .search{background:#fff}
+.tbtn{padding:10px 14px;border-radius:99px;border:2px solid #6C5CE7;background:transparent;color:#fff;cursor:pointer;font-weight:800;font-size:13px;white-space:nowrap}body[data-theme="light"] .tbtn{color:#111}.tbtn.active{background:#6C5CE7;color:#fff}.tbtn.theme{background:#6C5CE7;color:#fff}
+.main{flex:1;padding:22px;max-width:1120px;width:100%;margin:0 auto}
+.hero{background:linear-gradient(135deg,#6C5CE7,#8B7CFF 55%,#4A3BC7);color:#fff;padding:32px;border-radius:28px;box-shadow:0 20px 50px rgba(108,92,231,.35);position:relative;overflow:hidden}.hero h1{margin:0;font-size:38px;line-height:1.1}.hero p{opacity:.95;font-size:16px}.pill{display:inline-block;background:#fff;color:#6C5CE7;padding:7px 14px;border-radius:99px;font-weight:800;font-size:12px;margin-top:12px}.hero .stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.hero .stats div{background:rgba(255,255,255,.18);padding:10px 14px;border-radius:14px;font-weight:800;font-size:13px}
+.cat-filter{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.cat-filter button{padding:10px 16px;border-radius:99px;border:2px solid #6C5CE7;background:transparent;color:#fff;cursor:pointer;font-weight:700}body[data-theme="light"] .cat-filter button{color:#111}.cat-filter button.active{background:#6C5CE7;color:#fff;box-shadow:0 8px 20px rgba(108,92,231,.35)}
+.home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tool-card{background:linear-gradient(180deg,#171728,#12121F);border:1px solid #2A2A3D;border-radius:22px;padding:20px;cursor:pointer;position:relative;transition:.2s}.tool-card:hover{border-color:#6C5CE7;transform:translateY(-4px);box-shadow:0 16px 35px rgba(108,92,231,.25)}.tool-card .num{position:absolute;top:14px;right:14px;background:#6C5CE7;color:#fff;font-size:11px;font-weight:900;padding:5px 10px;border-radius:99px}.tool-card .ico{font-size:34px;width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:rgba(108,92,231,.18);border-radius:16px}.tool-card h3{margin:12px 0 4px;font-size:17px}.tool-card p{margin:0;color:#A9A9C2;font-size:13px}.tool-card .open{color:#A78BFF;font-weight:800;font-size:13px;margin-top:12px;display:block}.tool-card .ex{margin-top:8px;background:rgba(108,92,231,.12);padding:8px 10px;border-radius:10px;font-size:12px;color:#CFC6FF}
+.card{background:#14141F;border:1px solid #2A2A3D;border-radius:24px;padding:24px;margin:16px 0}
+label{display:block;font-size:13px;font-weight:700;margin:14px 0 4px;color:#CFC6FF}body[data-theme="light"] label{color:#6C5CE7}
+input,select{width:100%;padding:14px;border:1.5px solid #2A2A3D;border-radius:14px;margin:0 0 4px;font-size:16px;background:#0B0B12;color:#fff;outline:none}input:focus,select:focus{border-color:#6C5CE7;box-shadow:0 0 0 3px rgba(108,92,231,.2)}
+.btn{width:100%;padding:15px;border:0;border-radius:16px;background:linear-gradient(135deg,#6C5CE7,#8B7CFF);color:#fff;font-weight:800;font-size:17px;cursor:pointer;box-shadow:0 10px 25px rgba(108,92,231,.35)}.btn:active{transform:scale(.98)}.back{background:#fff!important;color:#6C5CE7!important;box-shadow:none}
+.result{background:#0B0B12;border:2px solid #6C5CE7;color:#fff;padding:18px;border-radius:16px;font-size:20px;font-weight:900;text-align:center;margin-top:14px;line-height:1.4;white-space:pre-line}.result small{font-size:13px;font-weight:600;color:#A9A9C2;display:block;margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.key{padding:18px;font-size:20px;border-radius:16px;border:1px solid #2A2A3D;background:#1A1A2E;color:#fff;cursor:pointer;font-weight:700}.key:hover{border-color:#6C5CE7}.key.eq{background:#6C5CE7}
+.display{background:#000;color:#fff;padding:20px;border-radius:16px;text-align:right;font-size:38px;font-weight:900;min-height:70px;overflow-wrap:anywhere;border:2px solid #6C5CE7}
+.page{display:none}.page.active{display:block;animation:fade .25s ease}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.small{color:#A9A9C2;font-size:13px}.legal h3{margin-top:22px}.legal p,.legal li{color:#D9D9E8;line-height:1.7;font-size:15px}body[data-theme="light"] .legal p,body[data-theme="light"] .legal li{color:#333}
+.footer{background:#08080F;border-top:2px solid #6C5CE7;padding:24px 18px;text-align:center}body[data-theme="light"] .footer{background:#F6F6FF}
+.footer a{color:#6C5CE7;font-weight:800;text-decoration:none;margin:0 8px;cursor:pointer}.footer p{color:#A9A9C2;font-size:13px}
+.tool-head{display:flex;gap:14px;align-items:center}.tool-head .ico{font-size:44px;width:68px;height:68px;display:flex;align-items:center;justify-content:center;background:#6C5CE7;border-radius:20px;flex-shrink:0}
+.badge{display:inline-block;background:#22C55E;color:#fff;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:900}
+@media(max-width:820px){.main{padding:16px}.home-grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:30px}.topbar .search{order:3;max-width:100%}}
+
+/* --- NO SCROLL ON TOOL PAGES --- */
+body.tool-open{overflow:auto;height:auto}
+body.tool-open .main{height:auto;overflow:visible;padding:16px}
+body.tool-open .footer{display:block}
+body.tool-open .topbar{padding:12px 18px}
+.tool-page{height:auto;overflow:visible;display:none}
+.tool-page.active{display:block}
+.tool-page .card{margin:0;padding:14px 16px}
+.tool-page .tool-head{margin:0}
+
+
+/* ===== ULTRA FOCUS MODE - No top bar at all in tools, Only Focus Calculator ===== */
+/* On any tool page: REMOVE that top bar place completely (ProCalculator logo + Search + Home/History/About/Privacy/Light). Only focus calculator shows. Footer also hidden. */
+body.tool-open .topbar{display:none !important}
+body.tool-open .footer{display:none !important}
+body.tool-open .main{max-width:720px;padding-top:14px}
+/* Hide all extra sections inside tool pages - only focus calculator shows */
+.focus-hero,.step-bar,.feat-strip,.focus-info,.focus-nav,.focus-top{display:none !important}
+
+/* ===== PROFESSIONAL TOOL LAYOUT - Fill full width, no empty side space ===== */
+body.tool-open .main{max-width:1120px !important;padding:18px;width:100%}
+.focus-wrap{max-width:1120px !important;margin:0 auto;width:100%}
+.focus-card{padding:28px !important}
+.pro-head{display:flex;gap:16px;align-items:center;margin-bottom:6px}
+.pro-head h2{margin:0;font-size:28px}
+.pro-head p{margin:4px 0 0}
+.pro-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:20px;margin-top:18px;align-items:start}
+.pro-left{border:1.5px solid #2A2A3D;border-radius:20px;padding:20px;background:#0B0B12}body[data-theme="light"] .pro-left{background:#F8F8FF;border-color:#E8E8FF}
+.pro-left label:first-child{margin-top:0}
+.pro-right{position:sticky;top:14px}
+.pro-result-label{font-size:12px;font-weight:900;letter-spacing:1px;color:#6C5CE7;margin-bottom:8px;text-transform:uppercase}
+.pro-note{margin-top:12px;background:rgba(108,92,231,.12);border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.6;color:#CFC6FF}body[data-theme="light"] .pro-note{color:#555}
+.howto{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:16px}
+.howto-card{background:#14141F;border:1.5px solid #2A2A3D;border-radius:22px;padding:20px}body[data-theme="light"] .howto-card{background:#fff;border-color:#E8E8FF}
+.howto-card h3{margin:0 0 10px;font-size:16px}
+.howto-card ol,.howto-card ul{margin:0;padding-left:20px}
+.howto-card li{font-size:14px;line-height:1.7;color:#D9D9E8;margin-bottom:6px}body[data-theme="light"] .howto-card li{color:#444}
+.howto-card p{font-size:14px;line-height:1.7;color:#D9D9E8;margin:0}body[data-theme="light"] .howto-card p{color:#444}
+.howto-num{display:inline-flex;width:26px;height:26px;background:#6C5CE7;color:#fff;border-radius:50%;align-items:center;justify-content:center;font-size:12px;font-weight:900;margin-right:6px;flex-shrink:0}
+@media(max-width:820px){.pro-grid{grid-template-columns:1fr}.pro-right{position:static}.howto{grid-template-columns:1fr}.pro-head h2{font-size:22px}.focus-card{padding:18px !important}}
+/* ===== NEW FOCUSED TOOL UI/UX - ProCalculator ===== */
+.focus-wrap{max-width:680px;margin:0 auto;width:100%}
+.focus-top{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.focus-top button{flex:1;min-width:110px}
+.focus-hero{background:linear-gradient(135deg,#6C5CE7,#8B7CFF 60%,#4A3BC7);border-radius:26px;padding:22px 22px 18px;color:#fff;box-shadow:0 18px 40px rgba(108,92,231,.35);position:relative;overflow:hidden}
+.focus-hero:after{content:'';position:absolute;right:-30px;top:-30px;width:130px;height:130px;background:rgba(255,255,255,.14);border-radius:50%}
+.focus-hero .fh-row{display:flex;gap:14px;align-items:center;position:relative;z-index:1}
+.focus-hero .fh-ico{font-size:44px;width:72px;height:72px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.22);border-radius:20px;backdrop-filter:blur(6px)}
+.focus-hero h2{margin:0;font-size:26px;line-height:1.15}
+.focus-hero p{margin:6px 0 0;opacity:.92;font-size:14px;line-height:1.5}
+.focus-hero .fh-badge{display:inline-block;background:#fff;color:#6C5CE7;padding:5px 11px;border-radius:99px;font-size:11px;font-weight:900;margin-top:10px}
+.focus-hero .fh-num{position:absolute;right:16px;top:12px;background:rgba(0,0,0,.22);padding:5px 10px;border-radius:99px;font-size:11px;font-weight:900;z-index:1}
+.step-bar{display:flex;gap:6px;margin:14px 0}
+.step-bar div{flex:1;text-align:center;background:#14141F;border:1.5px solid #2A2A3D;border-radius:14px;padding:10px 6px;font-size:12px;font-weight:800}body[data-theme="light"] .step-bar div{background:#fff;border-color:#E8E8FF}
+.step-bar div b{display:block;font-size:16px;color:#6C5CE7}
+.focus-card{background:#14141F;border:1.5px solid #2A2A3D;border-radius:26px;padding:24px;box-shadow:0 14px 35px rgba(0,0,0,.25)}body[data-theme="light"] .focus-card{background:#fff;border-color:#E8E8FF}
+.focus-card label{font-size:13px;margin:14px 0 6px}
+.focus-card input,.focus-card select{padding:15px;font-size:17px;border-radius:15px}
+.focus-card .btn{padding:16px;font-size:18px;border-radius:16px}
+.focus-result{background:linear-gradient(180deg,#0B0B12,#14141F);border:2px solid #6C5CE7;border-radius:18px;padding:20px;text-align:center;font-size:22px;font-weight:900;line-height:1.45;white-space:pre-line;margin-top:14px}body[data-theme="light"] .focus-result{background:#F6F6FF;color:#111}
+.focus-result.empty{opacity:.6;font-size:16px;font-weight:700}
+.focus-actions{display:flex;gap:8px;margin-top:12px}
+.focus-actions button{flex:1;padding:12px;border-radius:14px;border:1.5px solid #6C5CE7;background:transparent;color:#fff;font-weight:800;cursor:pointer;font-size:13px}body[data-theme="light"] .focus-actions button{color:#111}
+.focus-actions button.primary{background:#6C5CE7;color:#fff;border-color:#6C5CE7}
+.focus-info{background:#14141F;border:1px solid #2A2A3D;border-radius:22px;padding:20px;margin-top:12px}body[data-theme="light"] .focus-info{background:#fff;border-color:#E8E8FF}
+.focus-info h3{margin:0 0 8px;font-size:16px}
+.focus-info p{margin:0;color:#A9A9C2;font-size:14px;line-height:1.75}body[data-theme="light"] .focus-info p{color:#555}
+.focus-nav{display:flex;gap:8px;margin-top:12px}
+.focus-nav button{flex:1}
+@media(max-width:520px){.focus-hero{padding:18px}.focus-hero h2{font-size:22px}.focus-card{padding:18px}.focus-result{font-size:19px}}
+/* All-tools strip on top of every tool page - horizontal only, no page scroll */
+.alltools-strip{display:none;/* REMOVED - Focus Only */display:none;gap:6px;overflow-x:auto;overflow-y:hidden;padding:8px 4px 8px;scrollbar-width:none;white-space:nowrap;flex-shrink:0}
+.alltools-strip::-webkit-scrollbar{display:none}
+.alltools-strip button{flex:0 0 auto;padding:7px 11px;border-radius:99px;border:1.5px solid #6C5CE7;background:#14141F;color:#fff;cursor:pointer;font-weight:700;font-size:12px;white-space:nowrap}body[data-theme="light"] .alltools-strip button{background:#fff;color:#111}
+.alltools-strip button.active{background:#6C5CE7;color:#fff}
+.alltools-strip button:hover{transform:scale(1.03)}
+/* Features strip - this tool's features, above calculator */
+.feat-strip{display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
+.feat-strip span{background:rgba(108,92,231,.16);border:1px solid #6C5CE7;color:#CFC6FF;padding:6px 10px;border-radius:99px;font-size:11.5px;font-weight:800}body[data-theme="light"] .feat-strip span{color:#6C5CE7}
+/* Compact calculator - fits one screen */
+.tool-compact{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;min-height:0;overflow:visible}
+.tool-compact .calc-card{overflow:visible;display:flex;flex-direction:column;justify-content:flex-start}
+.tool-compact .info-card{overflow:visible;display:flex;flex-direction:column;justify-content:flex-start}
+.tool-compact label{margin:8px 0 3px}
+.tool-compact input,.tool-compact select{padding:11px}
+.tool-compact .btn{padding:12px;margin-top:10px}
+.tool-compact .result{padding:12px;font-size:18px;margin-top:10px}
+.tool-compact .key{padding:12px;font-size:18px}
+.tool-compact .display{padding:14px;font-size:30px;min-height:58px}
+@media(max-width:820px){body.tool-open .main{height:auto;min-height:calc(100vh - 62px)}.tool-compact{grid-template-columns:1fr;overflow-y:hidden}.tool-page{overflow:hidden}}
+@media(max-width:480px){.home-grid{grid-template-columns:1fr}}
+
+
+/* ===== MAKE EVERY TOOL PLACE FEW SMALL - Balanced Size ===== */
+body.tool-open .main{max-width:1080px !important;padding:20px 18px !important}
+.focus-wrap{max-width:1080px !important}
+.focus-card{padding:26px !important;border-radius:26px !important}
+.pro-head{gap:14px;margin-bottom:8px}
+.pro-head h2{font-size:29px !important;line-height:1.15}
+.pro-head p{font-size:15px !important;line-height:1.55}
+.pro-head div[style*="width:72px"]{width:76px !important;height:76px !important;font-size:46px !important;border-radius:22px !important}
+.pro-grid{gap:18px !important;margin-top:16px !important;grid-template-columns:1.05fr 0.95fr !important}
+.pro-left{padding:20px !important;border-radius:20px !important}
+.tool-page label{font-size:14px !important;margin:14px 0 7px !important}
+.tool-page input,.tool-page select{padding:15px 14px !important;font-size:18px !important;border-radius:15px !important}
+.tool-page .btn{padding:15px !important;font-size:19px !important;border-radius:15px !important;margin-top:14px}
+.tool-page .focus-result{font-size:24px !important;padding:22px 16px !important;border-radius:18px !important;min-height:105px !important;display:flex;align-items:center;justify-content:center}
+.tool-page .focus-result.empty{font-size:17px !important}
+.tool-page .focus-actions{margin-top:14px !important;gap:10px !important}
+.tool-page .focus-actions button{padding:13px 8px !important;font-size:14px !important;border-radius:14px !important}
+.pro-result-label{font-size:13px !important;margin-bottom:10px !important}
+.pro-note{font-size:14px !important;line-height:1.65 !important;padding:14px !important;border-radius:15px !important;margin-top:12px !important}
+.tool-page .key{padding:20px 10px !important;font-size:21px !important;border-radius:15px !important}
+.tool-page .display{font-size:42px !important;padding:22px 16px !important;min-height:82px !important;border-radius:18px !important}
+.howto{gap:14px !important;margin-top:16px !important}
+.howto-card{padding:20px !important;border-radius:22px !important}
+.howto-card h3{font-size:18px !important;margin-bottom:10px !important}
+.howto-card li{font-size:15px !important;line-height:1.7 !important;margin-bottom:7px !important}
+.howto-card p{font-size:15px !important;line-height:1.7 !important}
+.howto-num{width:28px !important;height:28px !important;font-size:13px !important}
+@media(max-width:820px){
+ body.tool-open .main{padding:16px 12px !important}
+ .focus-card{padding:18px !important}
+ .pro-head h2{font-size:24px !important}
+ .tool-page input,.tool-page select{padding:18px 14px !important;font-size:19px !important}
+ .tool-page .btn{padding:18px !important;font-size:20px !important}
+ .tool-page .focus-result{font-size:24px !important;padding:24px 14px !important;min-height:120px !important}
+ .howto-card{padding:20px !important}
+}
+
+</style></head><body data-theme="dark">
+<header class="topbar"><div class="logo">🧮 Pro<span>Calculator</span></div><input class="search" id="topSearch" placeholder="🔍 Search any tool... e.g. BMI, Loan, Zakat" oninput="filterAll(this.value)"><button class="tbtn active home-btn" onclick="show('home',this)">🏠 Home</button><button class="tbtn" onclick="show('history',this)">🕘 History</button><button class="tbtn" onclick="show('about',this)">ℹ️ About</button><button class="tbtn" onclick="show('privacy',this)">🔒 Privacy</button><button class="tbtn theme" id="themeTopBtn" onclick="toggleThemeTop()">☀️ Light</button></header>
+<main class="main">
+<div id="p-home" class="page active"><div class="hero"><h1>53 Real Calculators.<br>Every Tool Really Works. ✨</h1><p>No fake results. Each tool has its own real formula — BMI, EMI, Zakat, Tax, Currency, Age, GPA & more.</p><div class="stats"><div>✅ 100% Real Formulas</div><div>🎨 New Stylish Look</div><div>🌍 Public • Free for All</div></div><span class="pill">🏠 Home • Tool 01 to 53 • Tap Any Card</span></div>
+<div class="cat-filter"><button class="active" onclick="filterCat('all',this)">All (53)</button><button onclick="filterCat('math',this)">Math</button><button onclick="filterCat('health',this)">Health</button><button onclick="filterCat('finance',this)">Finance</button><button onclick="filterCat('tax',this)">Tax</button><button onclick="filterCat('business',this)">Business</button><button onclick="filterCat('fun',this)">Fun</button><button onclick="filterCat('currency',this)">Currency</button></div><div class="small" id="toolCount">Showing 53 tools</div><div class="home-grid" id="homeGrid"></div></div>
+<div id="p-history" class="page"><div class="card"><button class="btn back" onclick="show('home',null)">← Back to Home</button><h2>🕘 History</h2><div id="histList">No history yet. Use any calculator.</div><br><button class="btn" onclick="localStorage.removeItem('procalc_hist');document.getElementById('histList').innerHTML='Cleared'">Clear History</button></div></div>
+<div id="p-about" class="page"><div class="card legal"><button class="btn back" onclick="show('home',null)">← Back to Home</button><h2>ℹ️ About Us - ProCalculator</h2><p><b>Last updated: 15 November 2026</b></p><p>Welcome to <b>ProCalculator</b> - a <b>100% PUBLIC website for EVERYONE</b>.</p><p><b>This website is NOT private. It is NOT for one person only. It is a public website, open to all people around the world.</b> Anyone can visit, anyone can use all 53 calculators - no login, no password, no private account needed.</p><h3>🌍 A Public Website For The Public</h3><ul><li><b>Public:</b> Open to students, teachers, shopkeepers, job holders, families, business owners - everyone.</li><li><b>Free for all:</b> No sign-up, no fees.</li><li><b>For the whole world:</b> Pakistan, India, USA, UK, everywhere.</li><li><b>Share freely:</b> Share this link with anyone.</li></ul><h3>✅ Real Tools, Not Fake</h3><p>Every tool now uses its <b>real formula</b>. BMI uses weight & height, EMI uses loan formula, Zakat uses 2.5%, Currency uses real rates table, and so on.</p><h3>👤 Who Made ProCalculator?</h3><p>ProCalculator was created by <b>hknasar</b> in Pakistan 🇵🇰 as a public service website for the public.</p></div></div>
+<div id="p-privacy" class="page"><div class="card legal"><button class="btn back" onclick="show('home',null)">← Back to Home</button><h2>🔒 Privacy Policy - ProCalculator</h2><p><b>Last updated: 15 November 2026</b></p><p>ProCalculator is a public website - anyone can use it.</p><h3>1. What We Do NOT Collect</h3><ul><li>We do <b>NOT</b> ask for name, email, phone or password.</li><li>We do <b>NOT</b> collect calculation inputs on our server. Calculations happen in your browser.</li><li>We do <b>NOT</b> sell your data.</li></ul><h3>2. What Is Stored On Your Device Only</h3><p>Your <b>History</b> and <b>Dark / Light theme</b> are saved in your browser only. You can clear it anytime.</p><h3>3. Cookies</h3><p>Only basic storage to remember your theme. No advertising tracking.</p><h3>4. Children</h3><p>Public website safe for all ages. We do not knowingly collect data from children.</p><h3>5. Changes</h3><p>If we change this policy, we will update the date above.</p><h3>6. Questions</h3><p>See the About Us page on this website.</p></div></div>
+<div id="p-terms" class="page"><div class="card legal"><button class="btn back" onclick="show('home',null)">← Back to Home</button><h2>📜 Terms & Conditions</h2><p><b>Last updated: 15 November 2026</b></p><h3>1. Free Public Use</h3><p>ProCalculator is public, free for everyone.</p><h3>2. Accuracy</h3><p>Calculators give estimates. Currency, tax, loan and health results are <b>approximate</b>. Confirm with bank / doctor for big decisions.</p><h3>3. No Professional Advice</h3><p>Not medical, financial, legal or tax advice.</p></div></div>
+<div id="p-disclaimer" class="page"><div class="card legal"><button class="btn back" onclick="show('home',null)">← Back to Home</button><h2>⚠️ Disclaimer</h2><p>All calculators are provided "as is" for general information only. Currency rates change daily. Loan results do not include bank fees. BMI is a guide, not diagnosis.</p></div></div>
+<div id="p-cookie" class="page"><div class="card legal"><button class="btn back" onclick="show('home',null)">← Back to Home</button><h2>🍪 Cookie Policy</h2><p>Only essential storage: theme + history. No advertising tracking.</p></div></div>
+<div id="p-tools"></div></main>
+<footer class="footer"><a onclick="show('home',null)">🏠 Home</a> • <a onclick="show('about',null)">About Us</a> • <a onclick="show('privacy',null)">Privacy Policy</a> • <a onclick="show('terms',null)">Terms</a> • <a onclick="show('disclaimer',null)">Disclaimer</a> • <a onclick="show('cookie',null)">Cookie Policy</a><p>© 2026 ProCalculator • Public Website • Made by hknasar • 53 Real Calculators • Purple + Black</p></footer>
+<script>
+const TOOLS=[
+{n:"Standard Calculator",i:"🧮",d:"Real keypad calculator",c:"math"},
+{n:"Scientific Calculator",i:"🔬",d:"sin cos tan √ log",c:"math"},
+{n:"Percentage Calculator",i:"%",d:"What is X% of Y?",c:"math"},
+{n:"Average Calculator",i:"📊",d:"Average of numbers",c:"math"},
+{n:"Square Calculator",i:"⏹️",d:"Square, Cube & Root",c:"math"},
+{n:"Discount Calculator",i:"🏷️",d:"Final price after discount",c:"math"},
+{n:"Age Calculator",i:"🎂",d:"Exact age in years",c:"time"},
+{n:"Days Between Dates",i:"📅",d:"Days between 2 dates",c:"time"},
+{n:"BMI Calculator",i:"⚖️",d:"Body Mass Index + category",c:"health"},
+{n:"BMR Calculator",i:"🔥",d:"Calories body burns at rest",c:"health"},
+{n:"Water Intake",i:"💧",d:"Daily water need",c:"health"},
+{n:"Daily Calories",i:"🥗",d:"Calories you need per day",c:"health"},
+{n:"Ideal Weight",i:"⚖️",d:"Healthy weight range",c:"health"},
+{n:"Protein Needs",i:"🥚",d:"Protein per day in grams",c:"health"},
+{n:"Pregnancy Due Date",i:"🤰",d:"Due date from last period",c:"health"},
+{n:"Loan / EMI Calculator",i:"🏦",d:"Monthly EMI + total",c:"finance"},
+{n:"Mortgage Calculator",i:"🏠",d:"Home loan EMI",c:"finance"},
+{n:"Compound Interest",i:"📈",d:"Money grows with interest",c:"finance"},
+{n:"Simple Interest",i:"💰",d:"Simple interest",c:"finance"},
+{n:"Savings Goal",i:"🎯",d:"Monthly saving needed",c:"finance"},
+{n:"Credit Card Interest",i:"💳",d:"Payoff time + interest",c:"finance"},
+{n:"Car Loan EMI",i:"🚗",d:"Car loan monthly EMI",c:"finance"},
+{n:"Fuel Cost",i:"⛽",d:"Total fuel cost for trip",c:"finance"},
+{n:"Salary Calculator",i:"🧾",d:"Take-home pay",c:"tax"},
+{n:"Hourly Pay",i:"⏰",d:"Your hourly rate",c:"tax"},
+{n:"Tax Calculator",i:"🧾",d:"Tax + net income",c:"tax"},
+{n:"Profit Margin",i:"💼",d:"Profit, margin & markup",c:"business"},
+{n:"Currency Converter",i:"💱",d:"USD PKR EUR GBP + more",c:"currency"},
+{n:"Unit Converter",i:"📏",d:"Length, weight, temp",c:"currency"},
+{n:"MB to GB",i:"💻",d:"Data converter",c:"tech"},
+{n:"Download Time",i:"⬇️",d:"How long to download?",c:"tech"},
+{n:"GPA Calculator",i:"🎓",d:"GPA from 3 subjects",c:"school"},
+{n:"Grade Calculator",i:"📝",d:"Grade % + letter",c:"school"},
+{n:"Random Number",i:"🎲",d:"Random number generator",c:"fun"},
+{n:"Dice Roller",i:"🎲",d:"Roll a dice 1-6",c:"fun"},
+{n:"Coin Flip",i:"🪙",d:"Heads or Tails",c:"fun"},
+{n:"Zodiac Finder",i:"🔮",d:"Your zodiac sign",c:"fun"},
+{n:"Area Calculator",i:"📐",d:"Area + perimeter",c:"construction"},
+{n:"Tile Calculator",i:"🧱",d:"Tiles needed",c:"construction"},
+{n:"Paint Calculator",i:"🎨",d:"Paint litres needed",c:"construction"},
+{n:"Shipping Cost",i:"📦",d:"Shipping cost",c:"business"},
+{n:"Betting Profit",i:"🎮",d:"Bet profit + return",c:"fun"},
+{n:"Win % Calculator",i:"🏆",d:"Win percentage",c:"fun"},
+{n:"Life Path Number",i:"🔢",d:"Numerology life path",c:"fun"},
+{n:"Compatibility",i:"❤️",d:"Love compatibility %",c:"fun"},
+{n:"Tip Calculator",i:"💸",d:"Tip + total bill",c:"business"},
+{n:"GST Calculator",i:"🧾",d:"GST + total",c:"tax"},
+{n:"Rent Split",i:"🏠",d:"Rent per person",c:"finance"},
+{n:"Electricity Bill",i:"💡",d:"Bill estimate",c:"finance"},
+{n:"Internet Bill",i:"🌐",d:"Split internet bill",c:"finance"},
+{n:"Fuel Average",i:"🚙",d:"KM per litre",c:"finance"},
+{n:"Zakat Calculator",i:"🕌",d:"Zakat 2.5%",c:"finance"},
+{n:"History",i:"🕘",d:"Your history",c:"other"}
+];
+const FEATURES={"keypad": ["Real Keypad", "Instant Answer", "Saves to History"], "sci": ["sin \u2022 cos \u2022 tan", "\u221a \u2022 log \u2022 Square", "Instant Answer"], "perc": ["X% of Y", "Saves / Gets Amount", "Instant Answer"], "avg": ["Average of List", "Total + Count", "Instant Answer"], "square": ["Square (\u00b2)", "Cube (\u00b3)", "Square Root (\u221a)"], "discount": ["Final Price", "You Save Amount", "Discount %"], "age": ["Age in Years", "Total Days Lived", "Exact from DOB"], "days": ["Days Between", "Weeks + Months", "Instant Answer"], "bmi": ["BMI Number", "Category: Normal / Over / Obese", "Healthy Range"], "bmr": ["BMR Calories", "At Rest Calories", "Male / Female Formula"], "water": ["Litres Per Day", "Glasses Per Day", "By Body Weight"], "calories": ["Daily Calories", "BMR \u00d7 Activity", "By Age + Gender"], "ideal": ["Ideal Weight", "Healthy Range", "By Height + Gender"], "protein": ["Protein Grams / Day", "By Weight \u00d7 Goal", "Muscle / Fat Loss"], "preg": ["Due Date", "280 Days Formula", "From Last Period"], "emi": ["Monthly EMI", "Total Interest", "Total Paid"], "mortgage": ["Monthly EMI", "Total Over Years", "By Years"], "compound": ["Future Value", "Profit Earned", "Compound Growth"], "simple": ["Simple Interest", "Total Amount", "Principal + Interest"], "savings": ["Monthly Saving", "Target Amount", "By Years"], "cc": ["Payoff Months", "Total Interest", "Never-End Warning"], "fuelcost": ["Fuel Needed", "Total Fuel Cost", "By Mileage"], "salary": ["Take-Home Pay", "Tax Deducted", "Net Salary"], "hourly": ["Hourly Rate", "By Hours + Days", "Monthly \u2192 Hourly"], "tax": ["Tax Amount", "Net Income", "By Tax %"], "profit": ["Profit Amount", "Margin %", "Markup %"], "currency": ["9 Currencies", "USD \u2022 PKR \u2022 EUR \u2022 GBP", "Approx Live Rates"], "unit": ["Length \u2022 Weight", "Temp \u2022 Distance", "8 Conversions"], "data": ["KB \u2022 MB \u2022 GB \u2022 TB", "Instant Convert", "Data Sizes"], "download": ["Download Time", "Min + Sec", "By Speed Mbps"], "gpa": ["GPA Average", "Out of 4.0", "3 Subjects"], "grade": ["Percentage %", "Grade A+ to F", "Obtained / Total"], "random": ["Random Number", "Between Min\u2013Max", "New Every Tap"], "dice": ["Dice 1\u20136", "New Roll Every Tap", "Fun + Fair"], "coin": ["Heads or Tails", "50 / 50 Fair", "New Flip Every Tap"], "zodiac": ["Zodiac Sign", "From Date of Birth", "12 Signs"], "area": ["Area sq ft", "Perimeter", "Length \u00d7 Width"], "tile": ["Tiles Needed", "Room Area", " +10% Wastage"], "paint": ["Paint Litres", "By Area + Coats", "350 sq ft / Litre"], "shipping": ["Shipping Cost", "By Weight + Distance", "By Rate"], "bet": ["Profit", "Total Return", "Stake \u00d7 Odds"], "win": ["Win %", "Wins / Games", "Losses Count"], "lifepath": ["Life Path Number", "Numerology", "From DOB"], "compat": ["Compatibility %", "Love Match Message", "From 2 Names"], "tip": ["Tip Amount", "Total Bill", "By Tip %"], "gst": ["GST Amount", "Total With GST", "By GST %"], "rent": ["Per Person Rent", "Total / People", "Fair Split"], "bill": ["Bill Estimate", "Units \u00d7 Rate", " +10% Tax"], "internet": ["Per Person Bill", "Total / People", "Fair Split"], "avgfuel": ["KM Per Litre", "Distance / Fuel", "Mileage"], "zakat": ["Net Wealth", "Zakat 2.5%", "Cash - Debts"]};
+const FIELDS={"0": {"fields": [], "formula": "keypad", "example": "Try: 25 + 35 ="}, "1": {"fields": [["a", "Enter number", "number", "e.g. 30"], ["s", "Function", "select", "sin|cos|tan|sqrt|log|square|cube"]], "formula": "sci", "example": "sin 30 = 0.5"}, "2": {"fields": [["a", "Number (Y)", "number", "e.g. 500"], ["b", "Percentage % (X)", "number", "e.g. 20"]], "formula": "perc", "example": "20% of 500 = 100"}, "3": {"fields": [["t", "Numbers separated by comma", "text", "e.g. 10, 20, 30, 40"]], "formula": "avg", "example": "Avg of 10,20,30 = 20"}, "4": {"fields": [["a", "Number", "number", "e.g. 12"]], "formula": "square", "example": "12\u00b2 = 144, \u221a12 = 3.46"}, "5": {"fields": [["a", "Original price", "number", "e.g. 2000"], ["b", "Discount %", "number", "e.g. 25"]], "formula": "discount", "example": "25% off 2000 = 1500"}, "6": {"fields": [["a", "Date of birth", "date", ""]], "formula": "age", "example": "Born 2000 \u2192 Age 26"}, "7": {"fields": [["a", "Start date", "date", ""], ["b", "End date", "date", ""]], "formula": "days", "example": ""}, "8": {"fields": [["a", "Weight (kg)", "number", "e.g. 70"], ["b", "Height (cm)", "number", "e.g. 175"]], "formula": "bmi", "example": "70kg, 175cm \u2192 BMI 22.9 Normal"}, "9": {"fields": [["a", "Weight (kg)", "number", "70"], ["b", "Height (cm)", "number", "175"], ["c", "Age", "number", "25"], ["s", "Gender", "select", "Male|Female"]], "formula": "bmr", "example": ""}, "10": {"fields": [["a", "Weight (kg)", "number", "70"]], "formula": "water", "example": "70kg \u2192 2.3 Litres / 9 glasses"}, "11": {"fields": [["a", "Weight (kg)", "number", "70"], ["b", "Height (cm)", "number", "175"], ["c", "Age", "number", "25"], ["s", "Gender", "select", "Male|Female"], ["s2", "Activity", "select", "Sedentary x1.2|Light x1.375|Moderate x1.55|Active x1.725|Very Active x1.9"]], "formula": "calories", "example": ""}, "12": {"fields": [["a", "Height (cm)", "number", "175"], ["s", "Gender", "select", "Male|Female"]], "formula": "ideal", "example": "175cm Male \u2192 70.5 kg"}, "13": {"fields": [["a", "Weight (kg)", "number", "70"], ["s", "Goal", "select", "Maintain x1.2|Muscle x1.8|Fat Loss x1.6|Athlete x2.0"]], "formula": "protein", "example": ""}, "14": {"fields": [["a", "First day of last period", "date", ""]], "formula": "preg", "example": ""}, "15": {"fields": [["a", "Loan amount", "number", "e.g. 500000"], ["b", "Interest % per year", "number", "e.g. 12"], ["c", "Months", "number", "e.g. 24"]], "formula": "emi", "example": "500k, 12%, 24m \u2192 EMI 23537"}, "16": {"fields": [["a", "Home price / Loan", "number", "3000000"], ["b", "Interest % per year", "number", "10"], ["c", "Years", "number", "20"]], "formula": "mortgage", "example": ""}, "17": {"fields": [["a", "Principal", "number", "100000"], ["b", "Rate % per year", "number", "10"], ["c", "Years", "number", "5"]], "formula": "compound", "example": "100k @10% 5y \u2192 161051"}, "18": {"fields": [["a", "Principal", "number", "100000"], ["b", "Rate %", "number", "10"], ["c", "Years", "number", "3"]], "formula": "simple", "example": ""}, "19": {"fields": [["a", "Target amount", "number", "500000"], ["b", "Years to save", "number", "5"], ["c", "Interest % (optional)", "number", "8"]], "formula": "savings", "example": ""}, "20": {"fields": [["a", "Balance", "number", "100000"], ["b", "APR % per year", "number", "24"], ["c", "Monthly payment", "number", "5000"]], "formula": "cc", "example": ""}, "21": {"fields": [["a", "Car loan amount", "number", "1500000"], ["b", "Interest %", "number", "12"], ["c", "Months", "number", "36"]], "formula": "emi", "example": ""}, "22": {"fields": [["a", "Distance (km)", "number", "300"], ["b", "Mileage km per litre", "number", "15"], ["c", "Fuel price per litre", "number", "280"]], "formula": "fuelcost", "example": "300km, 15km/l, 280 \u2192 5600 PKR"}, "23": {"fields": [["a", "Monthly salary", "number", "100000"], ["b", "Tax %", "number", "5"]], "formula": "salary", "example": "100k -5% = 95000"}, "24": {"fields": [["a", "Monthly salary", "number", "100000"], ["b", "Hours per day", "number", "8"], ["c", "Working days / month", "number", "26"]], "formula": "hourly", "example": ""}, "25": {"fields": [["a", "Yearly income", "number", "1200000"], ["b", "Tax rate %", "number", "5"]], "formula": "tax", "example": ""}, "26": {"fields": [["a", "Cost price", "number", "800"], ["b", "Selling price", "number", "1200"]], "formula": "profit", "example": "Cost 800 Sell 1200 \u2192 Profit 400, Margin 33%"}, "27": {"fields": [["a", "Amount", "number", "100"], ["s", "From", "select", "USD|PKR|EUR|GBP|SAR|AED|INR|CAD|AUD"], ["s2", "To", "select", "PKR|USD|EUR|GBP|SAR|AED|INR|CAD|AUD"]], "formula": "currency", "example": "100 USD = 27800 PKR approx"}, "28": {"fields": [["a", "Value", "number", "1"], ["s", "Convert", "select", "KM to Miles|Miles to KM|KG to Pounds|Pounds to KG|Celsius to Fahrenheit|Fahrenheit to Celsius|Metre to Feet|Feet to Metre"]], "formula": "unit", "example": ""}, "29": {"fields": [["a", "Value", "number", "2048"], ["s", "From", "select", "MB|GB|KB|TB"], ["s2", "To", "select", "GB|MB|KB|TB"]], "formula": "data", "example": "2048 MB = 2 GB"}, "30": {"fields": [["a", "File size (MB)", "number", "500"], ["b", "Internet speed (Mbps)", "number", "20"]], "formula": "download", "example": "500 MB @20 Mbps \u2192 3 min 20 sec"}, "31": {"fields": [["a", "Subject 1 GPA (0-4)", "number", "3.5"], ["b", "Subject 2 GPA", "number", "3.0"], ["c", "Subject 3 GPA", "number", "4.0"]], "formula": "gpa", "example": ""}, "32": {"fields": [["a", "Obtained marks", "number", "450"], ["b", "Total marks", "number", "500"]], "formula": "grade", "example": "450/500 = 90% = A+"}, "33": {"fields": [["a", "Min", "number", "1"], ["b", "Max", "number", "100"]], "formula": "random", "example": ""}, "34": {"fields": [], "formula": "dice", "example": "Tap Calculate to roll!"}, "35": {"fields": [], "formula": "coin", "example": "Tap Calculate to flip!"}, "36": {"fields": [["a", "Date of birth", "date", ""]], "formula": "zodiac", "example": ""}, "37": {"fields": [["a", "Length (ft)", "number", "20"], ["b", "Width (ft)", "number", "15"]], "formula": "area", "example": "20x15 = 300 sq ft"}, "38": {"fields": [["a", "Room length (ft)", "number", "20"], ["b", "Room width (ft)", "number", "15"], ["c", "Tile size (inch, e.g. 12)", "number", "12"]], "formula": "tile", "example": ""}, "39": {"fields": [["a", "Wall area (sq ft)", "number", "1000"], ["b", "Coats", "number", "2"]], "formula": "paint", "example": "1000 sq ft, 2 coats \u2192 ~5.7 litres"}, "40": {"fields": [["a", "Weight (kg)", "number", "5"], ["b", "Distance (km)", "number", "200"], ["c", "Rate per kg per 100km", "number", "50"]], "formula": "shipping", "example": ""}, "41": {"fields": [["a", "Stake", "number", "1000"], ["b", "Decimal odds", "number", "2.5"]], "formula": "bet", "example": "Stake 1000 @2.5 \u2192 Profit 1500"}, "42": {"fields": [["a", "Wins", "number", "18"], ["b", "Total games", "number", "25"]], "formula": "win", "example": "18/25 = 72%"}, "43": {"fields": [["a", "Date of birth", "date", ""]], "formula": "lifepath", "example": ""}, "44": {"fields": [["t", "Your name", "text", "e.g. Ali"], ["t2", "Partner name", "text", "e.g. Sara"]], "formula": "compat", "example": "Ali + Sara = 87% \u2764\ufe0f"}, "45": {"fields": [["a", "Bill amount", "number", "2000"], ["b", "Tip %", "number", "10"]], "formula": "tip", "example": "Bill 2000 +10% tip = 2200"}, "46": {"fields": [["a", "Price without GST", "number", "1000"], ["b", "GST %", "number", "18"]], "formula": "gst", "example": "1000 +18% = 1180"}, "47": {"fields": [["a", "Total rent", "number", "30000"], ["b", "Number of people", "number", "3"]], "formula": "rent", "example": "30000 / 3 = 10000 each"}, "48": {"fields": [["a", "Units (kWh)", "number", "300"], ["b", "Rate per unit", "number", "35"]], "formula": "bill", "example": "300 units @35 = 10500 + tax"}, "49": {"fields": [["a", "Internet bill", "number", "4000"], ["b", "People sharing", "number", "4"]], "formula": "internet", "example": "4000 / 4 = 1000 each"}, "50": {"fields": [["a", "Distance travelled (km)", "number", "300"], ["b", "Fuel used (litres)", "number", "20"]], "formula": "avgfuel", "example": "300km / 20L = 15 km/l"}, "51": {"fields": [["a", "Total cash + gold + savings", "number", "1000000"], ["b", "Debts / loans to pay", "number", "100000"]], "formula": "zakat", "example": "Zakat on 900k = 22500"}};
+
+function setTheme(t){document.body.setAttribute('data-theme',t);let b=document.getElementById('themeTopBtn');if(b)b.textContent=(t==='dark'?'☀️ Light':'🌙 Dark');localStorage.setItem('procalc-theme',t)}function toggleThemeTop(){setTheme(document.body.getAttribute('data-theme')==='dark'?'light':'dark')}if(localStorage.getItem('procalc-theme'))setTheme(localStorage.getItem('procalc-theme'));
+let curCat='all';
+function renderHome(){let g=document.getElementById('homeGrid');g.innerHTML=TOOLS.map((t,i)=>`<div class="tool-card" data-cat="${t.c}" data-name="${t.n.toLowerCase()}" onclick="show('${t.n==='History'?'history':'tool-'+i}',null)"><span class="num">${String(i+1).padStart(2,'0')}</span><div class="ico">${t.i}</div><h3>${t.n}</h3><p>${t.d} • ${t.c}</p><span class="open">Open Tool →</span><div class="ex">✅ Real formula • Tap to use</div></div>`).join('');filterCat(curCat)}
+function filterCat(cat,btn){curCat=cat;show('home',null);document.querySelectorAll('.cat-filter button').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase().includes(cat)||(cat==='all'&&b.textContent.includes('All'))));document.querySelectorAll('.tool-card').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none'});let n=[...document.querySelectorAll('.tool-card')].filter(c=>c.style.display!=='none').length;document.getElementById('toolCount').textContent=`Showing ${n} tools — Category: ${cat}`;}
+function filterSide(idx,q){q=q.toLowerCase();let side=document.getElementById('side-'+idx);if(!side)return;side.querySelectorAll('.side-item').forEach(el=>{el.style.display=el.dataset.name.includes(q)?'flex':'none'});}
+function filterAll(q){q=q.toLowerCase();show('home',null);document.querySelectorAll('.tool-card').forEach(c=>{c.style.display=c.dataset.name.includes(q)?'block':'none'});}
+function show(id,btn){if(String(id).startsWith('tool-'))document.body.classList.add('tool-open');else document.body.classList.remove('tool-open');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));let el=document.getElementById('p-'+id);if(el)el.classList.add('active');document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');window.scrollTo(0,0)}
+function fieldHTML(i){let f=FIELDS[i];if(!f)return'';return f.fields.map(fd=>{let id=fd[0]+i;if(fd[2]==='select'){return `<label>${fd[1]}</label><select id="${id}">${fd[3].split('|').map(o=>`<option value="${o}">${o}</option>`).join('')}</select>`}else if(fd[2]==='date'){return `<label>${fd[1]}</label><input id="${id}" type="date">`}else if(fd[2]==='text'){return `<label>${fd[1]}</label><input id="${id}" type="text" placeholder="${fd[3]}">`}else{return `<label>${fd[1]}</label><input id="${id}" type="number" placeholder="${fd[3]}">`}}).join('')}
+let pages='';
+TOOLS.forEach((t,i)=>{
+ if(t.n==='History')return;
+ let extra=i===0?`<div class="display" id="disp0">0</div><br><div class="grid" id="keys0"></div>`:fieldHTML(i);
+ let ex=FIELDS[i]?FIELDS[i].example:'';
+ let feat = FEATURES[FIELDS[i].formula]||['Instant Result','Real Formula','Saves to History'];
+ let steps = (FIELDS[i].fields||[]).filter(f=>f[1]&&!f[1].toLowerCase().includes('button')).map(f=>f[1]);
+ let stepsHtml = steps.length? steps.map((s,k)=>`<li><span class="howto-num">${k+1}</span>Enter <b>${s}</b></li>`).join('')+`<li><span class="howto-num">${steps.length+1}</span>Tap <b>Calculate →</b></li><li><span class="howto-num">${steps.length+2}</span>See your <b>Result</b> instantly</li>` : `<li><span class="howto-num">1</span>Open this tool</li><li><span class="howto-num">2</span>Tap <b>Calculate →</b></li><li><span class="howto-num">3</span>See your <b>Result</b> instantly</li>`;
+ pages+=`<div id="p-tool-${i}" class="page tool-page"><div class="focus-wrap"><div class="focus-card"><button onclick="show('home',null)" style="background:transparent;border:1.5px solid #6C5CE7;color:#6C5CE7;padding:8px 14px;border-radius:99px;font-weight:800;cursor:pointer;font-size:13px;margin-bottom:14px">← Back to All Tools</button><div class="pro-head"><div style="font-size:44px;width:72px;height:72px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#6C5CE7,#8B7CFF);border-radius:20px;flex-shrink:0;box-shadow:0 10px 25px rgba(108,92,231,.35)">${t.i}</div><div><h2>${t.n}</h2><p class="small">${t.d} • ${t.c} • <span style="color:#22C55E;font-weight:800">✅ REAL FORMULA • 100% FREE</span></p><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">${feat.map(f=>`<span style="background:rgba(108,92,231,.16);border:1px solid #6C5CE7;color:#CFC6FF;padding:5px 10px;border-radius:99px;font-size:11px;font-weight:800">✅ ${f}</span>`).join('')}</div></div></div><div class="pro-grid"><div class="pro-left"><div style="font-size:12px;font-weight:900;letter-spacing:1px;color:#6C5CE7;margin-bottom:4px">ENTER YOUR VALUES</div>${extra}<button class="btn" onclick="calcTool(${i})">Calculate →</button></div><div class="pro-right"><div class="pro-result-label">✨ Your Result</div><div class="focus-result empty" id="res${i}">👆 Enter values & tap Calculate — your result will show here</div><div class="focus-actions"><button onclick="clearTool(${i})">↺ Clear</button><button class="primary" onclick="copyResult(${i})">📋 Copy Result</button><button onclick="show('history',null)">🕘 History</button></div><div class="pro-note"><b>📌 Example:</b> ${ex}<br><b>💾 Auto-save:</b> Every result saves to History. No login needed.</div></div></div></div><div class="howto"><div class="howto-card"><h3>📖 How to Use ${t.n}</h3><ol style="list-style:none;padding:0">${stepsHtml}</ol></div><div class="howto-card"><h3>🧮 What It Does</h3><p>${t.d}.<br><br>${feat.map(f=>`✅ ${f}<br>`).join('')}<br><b>Example:</b> ${ex}</p></div><div class="howto-card"><h3>💡 Pro Tips</h3><ul><li>Double-check your numbers before Calculate</li><li>Use <b>Copy Result</b> to share / save</li><li>Use <b>Clear</b> to start fresh</li><li>All results save to <b>History</b> automatically</li></ul></div></div></div></div>`;
+});
+document.getElementById('p-tools').innerHTML=pages;renderHome();
+let expr="";let keys=['C','⌫','%','÷','7','8','9','×','4','5','6','-','1','2','3','+','0','.','00','='];document.getElementById('keys0').innerHTML=keys.map(k=>`<button class="key ${k=='='?'eq':''}" onclick="press0('${k}')">${k}</button>`).join('');
+function press0(k){if(k=='C')expr="";else if(k=='⌫')expr=expr.slice(0,-1);else if(k=='='){try{let r=eval(expr.replaceAll('×','*').replaceAll('÷','/'));document.getElementById('res0').textContent=expr+' = '+r;expr=String(r);addHist('Standard: '+expr+' = '+r)}catch(e){document.getElementById('disp0').textContent='Error'}}else expr+=k;document.getElementById('disp0').textContent=expr||'0';}
+function clearTool(i){let card=document.getElementById('p-tool-'+i);if(!card)return;card.querySelectorAll('input').forEach(el=>el.value='');card.querySelectorAll('select').forEach(el=>el.selectedIndex=0);let r=document.getElementById('res'+i);if(r){r.textContent='👆 Enter values & tap Calculate — your result will show here';r.classList.add('empty');}}
+function copyResult(i){let txt=document.getElementById('res'+i)?.textContent||'';if(navigator.clipboard&&txt){navigator.clipboard.writeText(TOOLS[i].n+': '+txt).then(()=>alert('✅ Result copied!'));}else{alert(txt);}}
+function addHist(t){let h=JSON.parse(localStorage.getItem('procalc_hist')||'[]');h.unshift(t);localStorage.setItem('procalc_hist',JSON.stringify(h));let el=document.getElementById('histList');if(el)el.innerHTML=h.map(x=>'<div style="padding:10px;border-bottom:1px solid #2A2A3D">'+x+'</div>').join('');}
+function N(id){return parseFloat((document.getElementById(id)?.value||'').toString().replace(/,/g,''))||0}
+function S(id){return document.getElementById(id)?.value||''}
+function TX(id){return document.getElementById(id)?.value||''}
+function fmt(n){return Number(n).toLocaleString('en-US',{maximumFractionDigits:2})}
+function emi(P,annual,months){let r=annual/1200;if(!r)return P/months;return P*r*Math.pow(1+r,months)/(Math.pow(1+r,months)-1)}
+function calcTool(i){let f=FIELDS[i];let form=f.formula;let a=N('a'+i),b=N('b'+i),c=N('c'+i),s=S('s'+i),s2=S('s2'+i),t=TX('t'+i),t2=TX('t2'+i);let da=S('a'+i),db=S('b'+i);let label='';
+if(form==='sci'){let fn=s;let v=a;let r=fn==='sin'?Math.sin(v*Math.PI/180):fn==='cos'?Math.cos(v*Math.PI/180):fn==='tan'?Math.tan(v*Math.PI/180):fn==='sqrt'?Math.sqrt(v):fn==='log'?Math.log10(v):fn==='square'?v*v:v*v*v;label=`${fn}(${v}) = ${r.toFixed(4)}`;}
+else if(form==='perc'){label=`${b}% of ${fmt(a)} = ${fmt(a*b/100)}\nYou save / get ${fmt(a*b/100)}`;}
+else if(form==='avg'){let arr=t.split(',').map(x=>parseFloat(x)).filter(x=>!isNaN(x));let sum=arr.reduce((x,y)=>x+y,0);label=`Average of ${arr.join(', ')} = ${(sum/arr.length).toFixed(2)}\nTotal = ${fmt(sum)} • Count = ${arr.length}`;}
+else if(form==='square'){label=`${a}² = ${fmt(a*a)}  •  ${a}³ = ${fmt(a*a*a)}  •  √${a} = ${Math.sqrt(a).toFixed(2)}`;}
+else if(form==='discount'){let save=a*b/100;label=`Discount = ${fmt(save)}\nYou Pay = ${fmt(a-save)}  •  You Save ${b}%`;}
+else if(form==='age'){let d=new Date(da),now=new Date();let yrs=now.getFullYear()-d.getFullYear();let m=now.getMonth()-d.getMonth();if(m<0||(m===0&&now.getDate()<d.getDate()))yrs--;let days=Math.floor((now-d)/86400000);label=`Age = ${yrs} years\nTotal days lived ≈ ${fmt(days)} days`;}
+else if(form==='days'){let d1=new Date(da),d2=new Date(db);let diff=Math.abs(Math.round((d2-d1)/86400000));label=`Days between = ${fmt(diff)} days\n≈ ${(diff/7).toFixed(1)} weeks • ${(diff/30.44).toFixed(1)} months`;}
+else if(form==='bmi'){let h=b/100;let v=a/(h*h);let cat=v<18.5?'Underweight':v<25?'Normal ✅':v<30?'Overweight':'Obese';label=`BMI = ${v.toFixed(1)} — ${cat}\n${fmt(a)} kg, ${fmt(b)} cm`;}
+else if(form==='bmr'){let v=s==='Female'?(10*a+6.25*b-5*c-161):(10*a+6.25*b-5*c+5);label=`BMR = ${fmt(v)} calories/day at rest`;}
+else if(form==='water'){let L=a*0.033;label=`Drink ${L.toFixed(1)} Litres per day\n≈ ${Math.round(L*4.2)} glasses (250ml)`;}
+else if(form==='calories'){let bmr=s==='Female'?(10*a+6.25*b-5*c-161):(10*a+6.25*b-5*c+5);let mult=parseFloat(s2.split('x')[1])||1.2;label=`Daily Calories = ${fmt(bmr*mult)} kcal/day\nBMR ${fmt(bmr)} × Activity ${mult}`;}
+else if(form==='ideal'){let hIn=a/2.54;let over=hIn-60;let ideal=s==='Female'?45.5+2.3*over:50+2.3*over;label=`Ideal Weight ≈ ${ideal.toFixed(1)} kg\nHealthy range: ${(ideal*0.9).toFixed(1)} - ${(ideal*1.1).toFixed(1)} kg`;}
+else if(form==='protein'){let mult=parseFloat(s.split('x')[1])||1.2;label=`Protein = ${(a*mult).toFixed(0)} g per day\n${fmt(a)} kg × ${mult}`;}
+else if(form==='preg'){let d=new Date(da);d.setDate(d.getDate()+280);label=`Due Date = ${d.toDateString()}\n280 days from last period`;}
+else if(form==='emi'){let e=emi(a,b,c);label=`Monthly EMI = ${fmt(e)}\nTotal Paid = ${fmt(e*c)} • Interest = ${fmt(e*c-a)}`;}
+else if(form==='mortgage'){let months=c*12;let e=emi(a,b,months);label=`Monthly EMI = ${fmt(e)}\n${c} years (${months} months) • Total = ${fmt(e*months)}`;}
+else if(form==='compound'){let v=a*Math.pow(1+b/100,c);label=`Future Value = ${fmt(v)}\nProfit = ${fmt(v-a)} • Principal ${fmt(a)}`;}
+else if(form==='simple'){let intr=a*b*c/100;label=`Simple Interest = ${fmt(intr)}\nTotal = ${fmt(a+intr)}`;}
+else if(form==='savings'){let months=b*12;let monthly=a/months;label=`Save ${fmt(monthly)} per month\nTo reach ${fmt(a)} in ${b} years (${months} months)`;}
+else if(form==='cc'){let mr=b/1200;let months=0,bal=a,totalInt=0;if(c<=bal*mr){label=`Monthly payment too low! It will never finish. Increase payment above ${fmt(bal*mr)} (interest only).`}else{while(bal>0&&months<600){let intr=bal*mr;totalInt+=intr;bal=bal+intr-c;months++;}label=`Payoff in ≈ ${months} months (${(months/12).toFixed(1)} years)\nTotal Interest ≈ ${fmt(totalInt)}`;}}
+else if(form==='fuelcost'){let litres=a/b;label=`Fuel needed = ${litres.toFixed(1)} litres\nTotal Cost = ${fmt(litres*c)}`;}
+else if(form==='salary'){label=`Take-Home = ${fmt(a*(1-b/100))}\nTax deducted = ${fmt(a*b/100)}`;}
+else if(form==='hourly'){label=`Hourly Pay = ${fmt(a/(b*c))} per hour\nMonthly ${fmt(a)} / (${b}h × ${c} days)`;}
+else if(form==='tax'){label=`Tax = ${fmt(a*b/100)}\nNet Income = ${fmt(a*(1-b/100))}`;}
+else if(form==='profit'){let prof=b-a;label=`Profit = ${fmt(prof)}\nMargin = ${(b?(prof/b*100):0).toFixed(1)}% • Markup = ${(a?(prof/a*100):0).toFixed(1)}%`;}
+else if(form==='currency'){let rates={USD:278,PKR:1,EUR:300,GBP:350,SAR:74,AED:76,INR:3.3,CAD:205,AUD:185};let inPKR=a*rates[s];let out=inPKR/rates[s2];label=`${fmt(a)} ${s} = ${fmt(out)} ${s2}\nRate approx: 1 ${s} = ${(rates[s]/rates[s2]).toFixed(2)} ${s2}`;}
+else if(form==='unit'){let v=a,lab='';if(s.startsWith('KM')){lab=`${v} KM = ${(v*0.621).toFixed(2)} Miles`}else if(s.startsWith('Miles')){lab=`${v} Miles = ${(v*1.609).toFixed(2)} KM`}else if(s.startsWith('KG')){lab=`${v} KG = ${(v*2.205).toFixed(2)} Pounds`}else if(s.startsWith('Pounds')){lab=`${v} Pounds = ${(v*0.454).toFixed(2)} KG`}else if(s.startsWith('Celsius')){lab=`${v}°C = ${(v*9/5+32).toFixed(1)}°F`}else if(s.startsWith('Fahrenheit')){lab=`${v}°F = ${((v-32)*5/9).toFixed(1)}°C`}else if(s.startsWith('Metre')){lab=`${v} m = ${(v*3.281).toFixed(2)} Feet`}else{lab=`${v} Feet = ${(v*0.305).toFixed(2)} Metre`}label=lab;}
+else if(form==='data'){let toMB={KB:1/1024,MB:1,GB:1024,TB:1024*1024};let mb=a*toMB[s];let out=mb/toMB[s2];label=`${fmt(a)} ${s} = ${fmt(out)} ${s2}`;}
+else if(form==='download'){let sec=a*8/b;let min=Math.floor(sec/60);label=`Download Time = ${min} min ${Math.round(sec%60)} sec\n${fmt(a)} MB @ ${fmt(b)} Mbps`;}
+else if(form==='gpa'){label=`GPA = ${((a+b+c)/3).toFixed(2)} / 4.0\nSubjects: ${a}, ${b}, ${c}`;}
+else if(form==='grade'){let p=a/b*100;let g=p>=90?'A+':p>=80?'A':p>=70?'B':p>=60?'C':p>=50?'D':'F';label=`${p.toFixed(1)}% — Grade ${g}\n${fmt(a)} / ${fmt(b)}`;}
+else if(form==='random'){let v=Math.floor(Math.random()*(b-a+1))+a;label=`🎲 Random Number = ${v}\nBetween ${a} and ${b}`;}
+else if(form==='dice'){let v=Math.floor(Math.random()*6)+1;let faces=['','⚀','⚁','⚂','⚃','⚄','⚅'];label=`${faces[v]}  You rolled ${v}!`;}
+else if(form==='coin'){label=Math.random()<0.5?'🪙 HEADS!':'🪙 TAILS!';}
+else if(form==='zodiac'){let d=new Date(da);let m=d.getMonth()+1,day=d.getDate();let z=[['Capricorn',19],['Aquarius',18],['Pisces',20],['Aries',19],['Taurus',20],['Gemini',20],['Cancer',22],['Leo',22],['Virgo',21],['Libra',22],['Scorpio',21],['Sagittarius',21],['Capricorn',31]];let sign=m===1&&day<=19?'Capricorn':z[m-1][0];if(day<z[m-1][1]&&m>1)sign=z[m-2][0];if(m===1&&day>19)sign='Aquarius';label=`Your Zodiac = ${sign} ♈\nBorn ${da}`;}
+else if(form==='area'){label=`Area = ${fmt(a*b)} sq ft\nPerimeter = ${fmt(2*(a+b))} ft`;}
+else if(form==='tile'){let room=a*b;let tileSq=(c/12)*(c/12);let n=Math.ceil(room/tileSq*1.1);label=`Tiles needed = ${n} tiles\nRoom ${fmt(room)} sq ft • Tile ${c}x${c} inch • +10% wastage`;}
+else if(form==='paint'){let litres=a*b/350;label=`Paint needed ≈ ${litres.toFixed(1)} litres\n${fmt(a)} sq ft × ${b} coats (350 sq ft / litre)`;}
+else if(form==='shipping'){label=`Shipping Cost = ${fmt(a*b*c/100)}\n${fmt(a)} kg × ${fmt(b)} km × ${fmt(c)} rate`;}
+else if(form==='bet'){label=`Profit = ${fmt(a*(b-1))}\nReturn = ${fmt(a*b)} (stake + profit)`;}
+else if(form==='win'){label=`Win Rate = ${(b?(a/b*100):0).toFixed(1)}%\n${a} wins / ${b} games • Losses ${b-a}`;}
+else if(form==='lifepath'){let str=da.replaceAll('-','');let sum=0;for(let ch of str)sum+=parseInt(ch);while(sum>9&&sum!==11&&sum!==22){let s2=0;for(let ch of String(sum))s2+=parseInt(ch);sum=s2;}label=`Life Path Number = ${sum}\nFrom ${da}`;}
+else if(form==='compat'){let str=(t+t2).toLowerCase();let h=0;for(let ch of str)h=(h*31+ch.charCodeAt(0))%101;let score=50+(h%50);label=`${t} ❤️ ${t2} = ${score}% Compatible!\n${score>=85?'Perfect Match! 💖':score>=70?'Great Match! 😍':score>=50?'Good Match 🙂':'Try to understand each other 💛'}`;}
+else if(form==='tip'){label=`Tip = ${fmt(a*b/100)}\nTotal Bill = ${fmt(a*(1+b/100))}`;}
+else if(form==='gst'){label=`GST = ${fmt(a*b/100)}\nTotal with GST = ${fmt(a*(1+b/100))}`;}
+else if(form==='rent'){label=`Each Person Pays = ${fmt(a/b)}\nTotal ${fmt(a)} / ${b} people`;}
+else if(form==='bill'){let tax=a*b*0.10;label=`Electricity Bill ≈ ${fmt(a*b+tax)}\nUnits ${fmt(a)} × ${fmt(b)} = ${fmt(a*b)} + 10% tax ${fmt(tax)}`;}
+else if(form==='internet'){label=`Each Pays = ${fmt(a/b)}\nBill ${fmt(a)} / ${b} people`;}
+else if(form==='avgfuel'){label=`Fuel Average = ${(a/b).toFixed(1)} km / litre\n${fmt(a)} km / ${fmt(b)} L`;}
+else if(form==='zakat'){let net=a-b;label=`Net Wealth = ${fmt(net)}\nZakat (2.5%) = ${fmt(net*0.025)}`;}
+let _r=document.getElementById('res'+i);if(_r){_r.textContent=label;_r.classList.remove('empty');}addHist(TOOLS[i].n+': '+label.replace(/\n/g,' | '));}
+</script></body></html>
