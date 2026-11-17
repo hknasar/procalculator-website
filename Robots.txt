@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://procalculator-website.haiderkhannasar123.workers.dev/sitemap.xml
